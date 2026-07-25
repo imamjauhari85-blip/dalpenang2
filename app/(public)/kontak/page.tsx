@@ -1,26 +1,47 @@
+import type { Metadata } from "next";
+import { getPengaturan, pengaturanValue } from "@/lib/data/pengaturan";
+
 import ContactHero from "@/components/kontak/ContactHero";
 import ContactInfoCards from "@/components/kontak/ContactInfoCards";
 import ContactForm from "@/components/kontak/ContactForm";
 import ContactMap from "@/components/kontak/ContactMap";
 
-// Anda juga bisa mengimpor data ini secara dinamis dari lib/data/pengaturan.ts
-const SETTINGS = {
-  namaSekolah: "UPTD SDN TAMANSAREH 2",
-  alamat: "Jl. Raya Tamansareh, Kabupaten Sampang, Jawa Timur 69251",
-  telepon: "081234567890",
-  email: "sdntamansareh2@gmail.com",
-  jamOperasional: "Senin - Sabtu: 07:00 - 13:00",
-  koordinatMap: "-7.139964092838838, 113.2743876634702",
-  linkGmaps: "https://maps.app.goo.gl/5B8Sc1zVLtpZh2pA8",
-  youtube: "https://youtube.com/@uptdsdntamansareh2",
-};
+export const revalidate = 60;
 
-export default function KontakPage() {
+export async function generateMetadata(): Promise<Metadata> {
+  const pengaturan = await getPengaturan();
+  const namaSekolah = pengaturanValue(pengaturan, "nama_sekolah", "Sekolah Kami");
+
+  return {
+    title: "Kontak",
+    description: `Hubungi ${namaSekolah} untuk informasi lebih lanjut seputar layanan pendidikan.`,
+  };
+}
+
+export default async function KontakPage() {
+  const pengaturan = await getPengaturan();
+
+  const namaSekolah = pengaturanValue(pengaturan, "nama_sekolah", "Nama Sekolah");
+  const alamat = pengaturanValue(pengaturan, "alamat_sekolah", "-");
+  const telepon = pengaturanValue(pengaturan, "telepon_sekolah", "-");
+  const email = pengaturanValue(pengaturan, "email_sekolah", "-");
+  const jamOperasional = pengaturanValue(
+    pengaturan,
+    "jam_operasional",
+    "Senin - Jumat: 07:00 - 13:00"
+  );
+  const koordinatMap = pengaturanValue(pengaturan, "koordinat_map", "");
+
+  // link_gmaps tidak ada di skema pengaturan; bangun dari koordinat (konsisten dengan halaman Profil)
+  const linkGmaps = koordinatMap
+    ? `https://www.google.com/maps/dir/?api=1&destination=${koordinatMap.replace(/\s/g, "")}`
+    : "#";
+
   return (
     <main className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300">
       
       {/* 1. Hero Section */}
-      <ContactHero namaSekolah={SETTINGS.namaSekolah} />
+      <ContactHero namaSekolah={namaSekolah} />
 
       {/* 2. Main Content Section (Info & Form) */}
       <section id="kontak-section" className="py-12 sm:py-16 md:py-20 relative">
@@ -45,10 +66,10 @@ export default function KontakPage() {
             {/* Kolom Kiri: Kartu Informasi */}
             <div className="lg:col-span-5">
               <ContactInfoCards
-                alamat={SETTINGS.alamat}
-                telepon={SETTINGS.telepon}
-                email={SETTINGS.email}
-                jamOperasional={SETTINGS.jamOperasional}
+                alamat={alamat}
+                telepon={telepon}
+                email={email}
+                jamOperasional={jamOperasional}
               />
             </div>
 
@@ -63,9 +84,9 @@ export default function KontakPage() {
 
       {/* 3. Google Maps Section */}
       <ContactMap
-        koordinatMap={SETTINGS.koordinatMap}
-        alamat={SETTINGS.alamat}
-        linkGmaps={SETTINGS.linkGmaps}
+        koordinatMap={koordinatMap}
+        alamat={alamat}
+        linkGmaps={linkGmaps}
       />
 
     </main>

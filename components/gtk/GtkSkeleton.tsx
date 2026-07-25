@@ -1,14 +1,12 @@
 import React from "react";
 
 /**
- * Skeleton untuk konten di bawah Hero halaman GTK, dipakai selagi
- * fetchGtkData() di app/(public)/gtk/page.tsx masih berjalan.
+ * Skeleton untuk konten di bawah Hero halaman GTK.
  *
- * Penting: halaman GTK adalah Client Component ("use client") yang
- * mengambil data lewat useEffect (Supabase browser client), BUKAN
- * Server Component. Jadi app/(public)/gtk/loading.tsx (Suspense) tidak
- * akan menunggu fetch ini — skeleton harus dikontrol lewat state
- * `isLoading` di dalam komponen itu sendiri. Struktur & className di
+ * Halaman GTK adalah Server Component (getGtkList() di
+ * app/(public)/gtk/page.tsx berjalan di server), jadi komponen ini
+ * dipakai sebagai bagian dari app/(public)/gtk/loading.tsx (Suspense
+ * fallback saat navigasi/fetch berjalan). Struktur & className di
  * bawah sengaja dibuat semirip mungkin dengan StafSection.tsx supaya
  * tidak ada "loncatan" tata letak (layout shift) saat data asli masuk.
  */
