@@ -54,31 +54,31 @@ export default function LayananUtama() {
               : {};
 
             return (
-              <div key={l.href} role="listitem">
-                <CardComponent
-                  href={l.href}
-                  className="card-animate card-hover glass-card p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col group h-full"
-                  style={{ animationDelay: `${(i + 1) * 0.1}s` }}
-                  {...externalProps}
+              <CardComponent
+                key={l.href}
+                href={l.href}
+                className="card-animate card-hover glass-card p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col group"
+                style={{ animationDelay: `${(i + 1) * 0.1}s` }}
+                role="listitem"
+                {...externalProps}
+              >
+                <div
+                  className={`w-12 h-12 rounded-xl ${l.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md`}
+                  aria-hidden="true"
                 >
-                  <div
-                    className={`w-12 h-12 rounded-xl ${l.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md`}
-                    aria-hidden="true"
-                  >
-                    <i className={`fa-solid ${l.icon} text-xl`} />
-                  </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white mb-1.5 flex items-center gap-1.5">
-                    {l.title}
-                    {isExternal && (
-                      <i className="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400" aria-hidden="true" />
-                    )}
-                  </h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed flex-1">{l.desc}</p>
-                  <span className="text-blue-600 dark:text-blue-400 text-xs font-bold mt-3 flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Selengkapnya <i className="fa-solid fa-arrow-right text-[10px]" />
-                  </span>
-                </CardComponent>
-              </div>
+                  <i className={`fa-solid ${l.icon} text-xl`} />
+                </div>
+                <h3 className="font-bold text-gray-900 dark:text-white mb-1.5 flex items-center gap-1.5">
+                  {l.title}
+                  {isExternal && (
+                    <i className="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400" aria-hidden="true" />
+                  )}
+                </h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed flex-1">{l.desc}</p>
+                <span className="text-blue-600 dark:text-blue-400 text-xs font-bold mt-3 flex items-center gap-1 group-hover:gap-2 transition-all">
+                  Selengkapnya <i className="fa-solid fa-arrow-right text-[10px]" />
+                </span>
+              </CardComponent>
             );
           })}
         </div>

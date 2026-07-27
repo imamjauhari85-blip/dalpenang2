@@ -17,7 +17,7 @@ import Ekstrakurikuler from "@/components/home/Ekstrakurikuler";
 import BeritaTabs from "@/components/home/BeritaTabs";
 import Testimoni from "@/components/home/Testimoni";
 import MapsSection from "@/components/home/MapsSection";
-import { cldTransform, cldWide } from "@/lib/utils/cloudinary";
+import { cldWide } from "@/lib/utils/cloudinary";
 
 // ISR: data beranda cukup fresh dengan revalidate 60 detik
 export const revalidate = 60;
@@ -52,7 +52,7 @@ export default async function HomePage() {
     <>
       <JsonLdSchool />
 
-      <LoadingScreen namaSekolah={namaSekolah} logoUrl={cldTransform(logoSekolah, "w_128,c_fit,q_auto,f_auto")} />
+      <LoadingScreen namaSekolah={namaSekolah} logoUrl={logoSekolah} />
 
       {/* 1. Hero */}
       <Hero namaSekolah={namaSekolah} tahunBerdiri={tahunBerdiri} fotoSekolah={fotoSekolah} />
