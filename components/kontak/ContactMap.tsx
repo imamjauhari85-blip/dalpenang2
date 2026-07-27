@@ -1,3 +1,5 @@
+import MapEmbed from "@/components/ui/MapEmbed";
+
 interface ContactMapProps {
   koordinatMap: string;
   alamat: string;
@@ -22,16 +24,10 @@ export default function ContactMap({ koordinatMap, alamat, linkGmaps }: ContactM
         {/* Frame Map */}
         <div className="card-animate w-full h-[350px] md:h-[450px] lg:h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-gray-800 relative group">
           <div className="absolute inset-0 bg-gray-200 dark:bg-gray-800 animate-pulse -z-10" />
-          <iframe 
-            src={`https://maps.google.com/maps?q=${encodeURIComponent(koordinatMap)}&hl=id&z=17&output=embed`} 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-            className="relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
+          <MapEmbed
+            src={`https://maps.google.com/maps?q=${encodeURIComponent(koordinatMap)}&hl=id&z=17&output=embed`}
             title="Peta Lokasi"
+            className="relative z-10 transition-transform duration-700 group-hover:scale-[1.02]"
           />
         </div>
 

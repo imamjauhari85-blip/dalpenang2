@@ -1,3 +1,5 @@
+import MapEmbed from "@/components/ui/MapEmbed";
+
 interface MapsSectionProps {
   namaSekolah: string;
   alamat: string;
@@ -40,16 +42,7 @@ export default function MapsSection({ namaSekolah, alamat, koordinat }: MapsSect
         <div className="glass-card rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm overflow-hidden card-animate">
           <div className="grid md:grid-cols-3">
             <div className="md:col-span-2 h-72 sm:h-96">
-              <iframe
-                src={mapSrc}
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Peta lokasi ${namaSekolah}`}
-                aria-label={`Peta lokasi ${namaSekolah}`}
-              />
+              <MapEmbed src={mapSrc} title={`Peta lokasi ${namaSekolah}`} />
             </div>
             <div className="p-6 sm:p-8 flex flex-col justify-center">
               <div
