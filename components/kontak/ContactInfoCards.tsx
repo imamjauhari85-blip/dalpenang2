@@ -6,6 +6,8 @@ interface ContactInfoCardsProps {
 }
 
 export default function ContactInfoCards({ alamat, telepon, email, jamOperasional }: ContactInfoCardsProps) {
+  const jamOperasionalHtml = jamOperasional.replace(/&lt;br&gt;/g, "<br>");
+
   return (
     <div className="space-y-4 sm:space-y-6">
       
@@ -49,7 +51,10 @@ export default function ContactInfoCards({ alamat, telepon, email, jamOperasiona
         </div>
         <div>
           <h3 className="font-bold text-gray-800 dark:text-gray-200 text-base sm:text-lg mb-1">Jam Operasional</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{jamOperasional}</p>
+          <p
+            className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: jamOperasionalHtml }}
+          />
         </div>
       </div>
 
