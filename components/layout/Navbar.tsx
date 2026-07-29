@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 import { cldTransform } from "@/lib/utils/cloudinary";
 import { pengaturanValue } from "@/lib/data/pengaturan";
@@ -56,6 +56,7 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   const telepon = pengaturanValue(pengaturan, "telepon_sekolah", "");
   const email = pengaturanValue(pengaturan, "email_sekolah", "");
@@ -71,8 +72,27 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Ukur tinggi asli (top info bar + nav utama) dan simpan ke CSS variable
+  // --header-h, supaya hero di tiap halaman (min-h-[calc(100dvh-var(--header-h))])
+  // selalu pas menyesuaikan tinggi header sebenarnya — otomatis update kalau
+  // font baru selesai load, layar di-resize, atau top info bar
+  // muncul/hilang di breakpoint sm.
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el) return;
+
+    const setHeaderHeight = () => {
+      document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+    };
+
+    setHeaderHeight();
+    const observer = new ResizeObserver(setHeaderHeight);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <>
+    <header ref={headerRef}>
       {/* ============ TOP INFO BAR ============ */}
       {(telepon || email || (alamat && alamat !== "-") || (npsn && npsn !== "-")) && (
         <div className="hidden sm:block bg-navy-2 text-paper/60">
@@ -226,6 +246,6 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
           </div>
         )}
       </nav>
-    </>
+    </header>
   );
 }
