@@ -56,7 +56,14 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
+  // Dua ref terpisah (BUKAN satu <header> pembungkus) — sengaja, supaya
+  // <nav sticky> tetap jadi child langsung dari <body>. Kalau dibungkus
+  // satu elemen pendek (cuma setinggi topbar+nav), posisi sticky-nya
+  // "kekurung" di kotak pendek itu dan lepas nempel begitu discroll
+  // melewati tingginya. Dengan tetap jadi sibling, sticky punya "ruang
+  // gerak" sepanjang tinggi <body> (satu halaman penuh).
+  const topbarRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
   const telepon = pengaturanValue(pengaturan, "telepon_sekolah", "");
   const email = pengaturanValue(pengaturan, "email_sekolah", "");
@@ -77,25 +84,33 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
   // selalu pas menyesuaikan tinggi header sebenarnya — otomatis update kalau
   // font baru selesai load, layar di-resize, atau top info bar
   // muncul/hilang di breakpoint sm.
+  //
+  // Pakai offsetHeight (bukan getBoundingClientRect) karena offsetHeight
+  // adalah ukuran intrinsik elemen — tidak berubah walau nav lagi
+  // "menempel" (sticky) saat discroll, beda dengan getBoundingClientRect
+  // yang ikut berubah sesuai posisi visual saat itu.
   useEffect(() => {
-    const el = headerRef.current;
-    if (!el) return;
+    const topbarEl = topbarRef.current;
+    const navEl = navRef.current;
+    if (!navEl) return;
 
     const setHeaderHeight = () => {
-      document.documentElement.style.setProperty("--header-h", `${el.offsetHeight}px`);
+      const total = (topbarEl?.offsetHeight ?? 0) + navEl.offsetHeight;
+      document.documentElement.style.setProperty("--header-h", `${total}px`);
     };
 
     setHeaderHeight();
     const observer = new ResizeObserver(setHeaderHeight);
-    observer.observe(el);
+    observer.observe(navEl);
+    if (topbarEl) observer.observe(topbarEl);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <header ref={headerRef}>
+    <>
       {/* ============ TOP INFO BAR ============ */}
       {(telepon || email || (alamat && alamat !== "-") || (npsn && npsn !== "-")) && (
-        <div className="hidden sm:block bg-navy-2 text-paper/60">
+        <div ref={topbarRef} className="hidden sm:block bg-navy-2 text-paper/60">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-2 font-mono text-[11px] tracking-wide">
             <div className="flex gap-5">
               {telepon && (
@@ -127,6 +142,7 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
 
       {/* ============ NAV UTAMA ============ */}
       <nav
+        ref={navRef}
         className={`sticky top-0 z-50 bg-paper/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-line dark:border-gray-800 transition-shadow ${
           scrolled ? "shadow-md" : ""
         }`}
@@ -246,6 +262,6 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
           </div>
         )}
       </nav>
-    </header>
+    </>
   );
 }
