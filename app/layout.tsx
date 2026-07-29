@@ -1,15 +1,29 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Fraunces } from "next/font/google";
 import "./globals.css";
 import { getPengaturan, pengaturanValue } from "@/lib/data/pengaturan";
 import { cldTransform } from "@/lib/utils/cloudinary";
 import ThemeInit from "@/components/theme/ThemeInit"; // 1. Impor komponen ThemeInit baru
 
-const inter = Inter({
+// Font isi/body. Sebelumnya Inter — diganti Plus Jakarta Sans mengikuti
+// arah desain baru (lihat referensi: beranda-sekolah.html). Nama variable
+// CSS diganti --font-body (bukan --font-inter lagi) biar gak menyesatkan.
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-body",
+});
+
+// Font judul (h1/h2) di seluruh situs — dipasangkan dengan font-body untuk
+// isi/nav/label. Sebelumnya Lora, diganti Fraunces mengikuti arah desain
+// baru. Dipakai lewat utility `font-serif` (lihat mapping --font-serif
+// di globals.css).
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+  variable: "--font-heading",
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -103,7 +117,7 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`h-full antialiased ${inter.variable}`}
+      className={`h-full antialiased ${plusJakartaSans.variable} ${fraunces.variable}`}
       suppressHydrationWarning
     >
       <head>

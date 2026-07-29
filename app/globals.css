@@ -16,8 +16,25 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter), "Segoe UI", system-ui, sans-serif;
+  --font-sans: var(--font-body), "Segoe UI", system-ui, sans-serif;
+  --font-serif: var(--font-heading), Georgia, "Times New Roman", serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* ============================================================
+     PALET DESAIN BARU (dari referensi beranda-sekolah.html)
+     Dipakai bertahap mulai dari Navbar; belum dipakai di komponen
+     lain sampai halaman itu direkonstruksi juga. Tailwind v4
+     otomatis bikin utility class dari token --color-* ini, contoh:
+     bg-navy, text-gold, border-line, dst.
+     ============================================================ */
+  --color-ink: #12211f;
+  --color-navy: #123c42;
+  --color-navy-2: #0c2b30;
+  --color-paper: #eff3ef;
+  --color-paper-2: #e7ece6;
+  --color-gold: #c89b3c;
+  --color-gold-light: #e4c77a;
+  --color-line: #12211f14;
 }
 
 .dark {
@@ -32,28 +49,22 @@ body {
 }
 
 /* ============================================================
-   NAVBAR LINK STATES
-   Porting dari includes/header.php (style inline lama)
+   FONT JUDUL vs ISI (global)
+   Pola yang sudah berjalan di ~37 komponen: h1 & h2 pakai font
+   judul (var(--font-serif)), sisanya (h3-h6, teks isi) ikut
+   font body (var(--font-sans)) dari <body> di atas.
+
+   Aturan ini bikin pola tsb otomatis berlaku ke SEMUA h1/h2 di
+   seluruh situs (termasuk app/admin/** yang sebelumnya 0% pakai
+   font judul), tanpa perlu tambah className "font-serif" manual
+   di tiap komponen. Kalau ada h1/h2 yang sengaja mau tetap pakai
+   font isi, tinggal kasih className="font-sans" langsung di
+   elemen itu — class selector lebih spesifik daripada tag
+   selector di bawah ini jadi otomatis menang.
    ============================================================ */
-.nav-link {
-  color: #4b5563;
-  transition: all 0.2s ease;
-}
-.dark .nav-link {
-  color: #d1d5db;
-}
-.nav-link:hover {
-  color: #2563eb;
-}
-.dark .nav-link:hover {
-  color: #facc15;
-}
-.nav-link.active {
-  color: #2563eb !important;
-  font-weight: 800;
-}
-.dark .nav-link.active {
-  color: #facc15 !important;
+h1,
+h2 {
+  font-family: var(--font-serif);
 }
 
 /* ============================================================

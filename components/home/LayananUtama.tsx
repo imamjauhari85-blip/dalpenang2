@@ -28,7 +28,8 @@ const LAYANAN = [
 export default function LayananUtama() {
   return (
     <section
-      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800"
+      id="layanan-utama"
+      className="py-12 sm:py-16 md:py-20 bg-white dark:bg-gray-950 border-t border-gray-100 dark:border-gray-800 scroll-mt-16"
       aria-label="Layanan utama sekolah"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +40,7 @@ export default function LayananUtama() {
           >
             🔗 Akses Cepat
           </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-serif font-black text-gray-900 dark:text-white">
             Layanan Utama
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-cyan-500 to-blue-400 mx-auto rounded-full mt-3" />
@@ -54,31 +55,31 @@ export default function LayananUtama() {
               : {};
 
             return (
-              <CardComponent
-                key={l.href}
-                href={l.href}
-                className="card-animate card-hover glass-card p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col group"
-                style={{ animationDelay: `${(i + 1) * 0.1}s` }}
-                role="listitem"
-                {...externalProps}
-              >
-                <div
-                  className={`w-12 h-12 rounded-xl ${l.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md`}
-                  aria-hidden="true"
+              <div key={l.href} role="listitem">
+                <CardComponent
+                  href={l.href}
+                  className="card-animate card-hover glass-card p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col group h-full"
+                  style={{ animationDelay: `${(i + 1) * 0.1}s` }}
+                  {...externalProps}
                 >
-                  <i className={`fa-solid ${l.icon} text-xl`} />
-                </div>
-                <h3 className="font-bold text-gray-900 dark:text-white mb-1.5 flex items-center gap-1.5">
-                  {l.title}
-                  {isExternal && (
-                    <i className="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400" aria-hidden="true" />
-                  )}
-                </h3>
-                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed flex-1">{l.desc}</p>
-                <span className="text-blue-600 dark:text-blue-400 text-xs font-bold mt-3 flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Selengkapnya <i className="fa-solid fa-arrow-right text-[10px]" />
-                </span>
-              </CardComponent>
+                  <div
+                    className={`w-12 h-12 rounded-xl ${l.color} text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md`}
+                    aria-hidden="true"
+                  >
+                    <i className={`fa-solid ${l.icon} text-xl`} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 dark:text-white mb-1.5 flex items-center gap-1.5">
+                    {l.title}
+                    {isExternal && (
+                      <i className="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-400" aria-hidden="true" />
+                    )}
+                  </h3>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed flex-1">{l.desc}</p>
+                  <span className="text-blue-600 dark:text-blue-400 text-xs font-bold mt-3 flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Selengkapnya <i className="fa-solid fa-arrow-right text-[10px]" />
+                  </span>
+                </CardComponent>
+              </div>
             );
           })}
         </div>
