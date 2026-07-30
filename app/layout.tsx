@@ -69,8 +69,43 @@ export async function generateMetadata(): Promise<Metadata> {
 
   publisher: namaSekolah,
     icons: {
-      icon: pengaturanValue(pengaturan, "logo_sekolah", "/favicon.ico"),
+      // Favicon utama: Lambang Kabupaten Sampang (di-generate jadi
+      // favicon.ico multi-resolusi + PNG persegi 32/192px, lihat
+      // app/favicon.ico & public/icons/). Ini yang selalu dipakai,
+      // gak tergantung logo sekolah di Pengaturan Situs — kalau logo
+      // sekolah nanti diisi, tetap disertakan sebagai varian tambahan
+      // (bukan menggantikan) supaya browser bisa pilih yang paling cocok.
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icons/icon-32.png", sizes: "32x32", type: "image/png" },
+        { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+        ...(logoSekolah
+          ? [
+              {
+                url: cldTransform(logoSekolah, "c_fill,w_192,h_192,q_auto,f_png"),
+                sizes: "192x192",
+                type: "image/png",
+              },
+            ]
+          : []),
+      ],
+      // apple-touch-icon: dipakai iOS Safari untuk ikon tab & "Add to Home
+      // Screen". Tanpa ini, iOS kadang gak konsisten fallback ke favicon
+      // biasa — makanya favicon sering "gak aktif" khusus di HP.
+      apple: [
+        { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+        ...(logoSekolah
+          ? [
+              {
+                url: cldTransform(logoSekolah, "c_fill,w_180,h_180,q_auto,f_png"),
+                sizes: "180x180",
+                type: "image/png",
+              },
+            ]
+          : []),
+      ],
     },
+
     // Default OpenGraph & Twitter Card untuk seluruh halaman. Halaman yang
     // butuh gambar/deskripsi berbeda (mis. detail berita) cukup meng-override
     // field yang relevan lewat generateMetadata masing-masing — field yang

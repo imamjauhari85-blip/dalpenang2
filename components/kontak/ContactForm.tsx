@@ -72,8 +72,9 @@ export default function ContactForm() {
       <form onSubmit={handleSubmit} className="space-y-5">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Nama Lengkap</label>
+            <label htmlFor="contact-nama" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Nama Lengkap</label>
             <input
+              id="contact-nama"
               type="text"
               name="nama"
               placeholder="Cth: Budi Santoso"
@@ -86,8 +87,9 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Email Aktif</label>
+            <label htmlFor="contact-email" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Email Aktif</label>
             <input
+              id="contact-email"
               type="email"
               name="email"
               placeholder="Cth: budi@email.com"
@@ -100,8 +102,9 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Subjek</label>
+          <label htmlFor="contact-subjek" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Subjek</label>
           <input
+            id="contact-subjek"
             type="text"
             name="subjek"
             placeholder="Perihal pesan Anda"
@@ -114,8 +117,9 @@ export default function ContactForm() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Kelas Anak</label>
+            <label htmlFor="contact-kelompok" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Kelas Anak</label>
             <select
+              id="contact-kelompok"
               name="kelompok"
               value={formData.kelompok}
               onChange={(e) => setFormData({ ...formData, kelompok: e.target.value })}
@@ -132,8 +136,9 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Kirim Sebagai</label>
+            <label htmlFor="contact-is_testi" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Kirim Sebagai</label>
             <select
+              id="contact-is_testi"
               name="is_testi"
               value={formData.is_testi}
               onChange={(e) => setFormData({ ...formData, is_testi: e.target.value })}
@@ -147,8 +152,8 @@ export default function ContactForm() {
 
         {formData.is_testi === "1" && (
           <div className="space-y-2">
-            <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Rating Kepuasan</label>
-            <div className="flex gap-2">
+            <label id="contact-rating-label" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">Rating Kepuasan</label>
+            <div className="flex gap-2" role="group" aria-labelledby="contact-rating-label">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
@@ -167,8 +172,9 @@ export default function ContactForm() {
         )}
         
         <div>
-          <label className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Pesan</label>
+          <label htmlFor="contact-pesan" className="block text-xs sm:text-sm font-bold text-gray-700 dark:text-gray-300 mb-2 uppercase tracking-wider">Pesan</label>
           <textarea
+            id="contact-pesan"
             name="pesan"
             rows={5}
             placeholder="Tuliskan pertanyaan atau masukan Anda di sini..."

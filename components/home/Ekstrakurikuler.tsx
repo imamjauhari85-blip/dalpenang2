@@ -7,6 +7,7 @@ import Image from "next/image";
 import { cldThumb } from "@/lib/utils/cloudinary";
 import type { EkskulWithPreview } from "@/lib/data/beranda";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
+import { useEscapeKey } from "@/hooks/useEscapeKey";
 
 interface EkstrakurikulerProps {
   ekskulList: EkskulWithPreview[];
@@ -56,14 +57,8 @@ export default function Ekstrakurikuler({ ekskulList }: EkstrakurikulerProps) {
     ? getEkskulIcon(ekskulList[activeIndex].nama, ekskulList[activeIndex].icon ?? "")
     : "";
 
-  // Tutup modal dengan Escape
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveIndex(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  // Tutup modal dengan Escape (aksesibilitas keyboard)
+  useEscapeKey(activeIndex !== null, () => setActiveIndex(null));
 
   // Kunci scroll body saat modal terbuka
   useLockBodyScroll(activeIndex !== null);

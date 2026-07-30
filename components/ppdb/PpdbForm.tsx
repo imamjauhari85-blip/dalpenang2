@@ -178,8 +178,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
           </h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm mb-1 dark:text-gray-300">NIK (16 Digit)</label>
+              <label htmlFor="ppdb-nik" className="block text-sm mb-1 dark:text-gray-300">NIK (16 Digit)</label>
               <input
+                id="ppdb-nik"
                 type="text"
                 name="nik"
                 required
@@ -192,8 +193,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               />
             </div>
             <div>
-              <label className="block text-sm mb-1 dark:text-gray-300">Nama Lengkap</label>
+              <label htmlFor="ppdb-nama" className="block text-sm mb-1 dark:text-gray-300">Nama Lengkap</label>
               <input
+                id="ppdb-nama"
                 type="text"
                 name="nama"
                 required
@@ -201,8 +203,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               />
             </div>
             <div>
-              <label className="block text-sm mb-1 dark:text-gray-300">Tempat Lahir</label>
+              <label htmlFor="ppdb-tempat_lahir" className="block text-sm mb-1 dark:text-gray-300">Tempat Lahir</label>
               <input
+                id="ppdb-tempat_lahir"
                 type="text"
                 name="tempat_lahir"
                 required
@@ -210,8 +213,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               />
             </div>
             <div>
-              <label className="block text-sm mb-1 dark:text-gray-300">Tanggal Lahir</label>
+              <label htmlFor="ppdb-tanggal_lahir" className="block text-sm mb-1 dark:text-gray-300">Tanggal Lahir</label>
               <input
+                id="ppdb-tanggal_lahir"
                 type="date"
                 name="tanggal_lahir"
                 required
@@ -219,8 +223,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               />
             </div>
             <div>
-              <label className="block text-sm mb-1 dark:text-gray-300">Jenis Kelamin</label>
+              <label htmlFor="ppdb-jenis_kelamin" className="block text-sm mb-1 dark:text-gray-300">Jenis Kelamin</label>
               <select
+                id="ppdb-jenis_kelamin"
                 name="jenis_kelamin"
                 required
                 defaultValue=""
@@ -234,8 +239,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               </select>
             </div>
             <div>
-              <label className="block text-sm mb-1 dark:text-gray-300">Agama</label>
+              <label htmlFor="ppdb-agama" className="block text-sm mb-1 dark:text-gray-300">Agama</label>
               <select
+                id="ppdb-agama"
                 name="agama"
                 required
                 defaultValue="Islam"
@@ -248,8 +254,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
             </div>
           </div>
           <div className="mt-6">
-            <label className="block text-sm mb-1 dark:text-gray-300">Alamat Lengkap (Sesuai KK)</label>
+            <label htmlFor="ppdb-alamat" className="block text-sm mb-1 dark:text-gray-300">Alamat Lengkap (Sesuai KK)</label>
             <textarea
+              id="ppdb-alamat"
               name="alamat"
               required
               rows={3}
@@ -268,6 +275,7 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               type="text"
               name="ayah"
               placeholder="Nama Ayah"
+              aria-label="Nama Ayah"
               required
               className="w-full border rounded-lg p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             />
@@ -275,6 +283,7 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               type="text"
               name="ibu"
               placeholder="Nama Ibu"
+              aria-label="Nama Ibu"
               required
               className="w-full border rounded-lg p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             />
@@ -284,6 +293,7 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               type="text"
               name="hp"
               placeholder="No WhatsApp (Aktif)"
+              aria-label="No WhatsApp (Aktif)"
               required
               className="w-full border rounded-lg p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
             />
@@ -297,10 +307,11 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
           </h2>
           <div className="grid md:grid-cols-3 gap-4">
             <div className="p-4 border rounded-xl dark:border-gray-700">
-              <label className="text-xs font-bold uppercase dark:text-gray-400">
+              <label htmlFor="ppdb-kk" className="text-xs font-bold uppercase dark:text-gray-400">
                 Kartu Keluarga (PDF, maks. 1MB)
               </label>
               <input
+                id="ppdb-kk"
                 type="file"
                 name="kk"
                 accept="application/pdf"
@@ -313,10 +324,11 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               )}
             </div>
             <div className="p-4 border rounded-xl dark:border-gray-700">
-              <label className="text-xs font-bold uppercase dark:text-gray-400">
+              <label htmlFor="ppdb-akta" className="text-xs font-bold uppercase dark:text-gray-400">
                 Akta Kelahiran (PDF, maks. 1MB)
               </label>
               <input
+                id="ppdb-akta"
                 type="file"
                 name="akta"
                 accept="application/pdf"
@@ -329,8 +341,9 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
               )}
             </div>
             <div className="p-4 border rounded-xl dark:border-gray-700">
-              <label className="text-xs font-bold uppercase dark:text-gray-400">Pas Foto (JPG/PNG)</label>
+              <label htmlFor="ppdb-foto" className="text-xs font-bold uppercase dark:text-gray-400">Pas Foto (JPG/PNG)</label>
               <input
+                id="ppdb-foto"
                 type="file"
                 name="foto"
                 accept="image/*"
@@ -368,6 +381,7 @@ export default function PpdbForm({ tahunId, initialCaptcha }: PpdbFormProps) {
                 name="captcha_user"
                 required
                 placeholder="Input hasil hitung"
+                aria-label={`Jawaban dari soal keamanan: ${captcha.soalText}`}
                 className="w-full border-2 border-blue-200 rounded-xl p-3 text-xl font-bold dark:bg-gray-800 dark:border-gray-600 dark:text-white focus:border-blue-500 outline-none transition-all"
               />
             </div>

@@ -47,6 +47,13 @@
   --color-paper-2: #e7ece6;
   --color-gold: #c89b3c;
   --color-gold-light: #e4c77a;
+  /* Varian gold lebih gelap, KHUSUS untuk teks di atas background terang
+     (mode terang) — --color-gold asli cuma kontras ~2.6:1 di atas putih,
+     di bawah standar WCAG AA (4.5:1) untuk teks biasa, jadi teks "aktif"
+     navbar susah dibaca orang dengan penglihatan rendah. Shade ini
+     (~4.6:1) tetap senada (hue sama) tapi cukup gelap buat lolos AA.
+     Di mode gelap tetap pakai --color-gold asli (sudah ~7:1, aman). */
+  --color-gold-dark: #927029;
   --color-line: #12211f14;
 }
 

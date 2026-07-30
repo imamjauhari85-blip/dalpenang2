@@ -182,8 +182,8 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
         href={item.href}
         className={`flex items-center gap-2 text-[14.5px] font-semibold py-2 px-1 transition-colors ${
           active
-            ? "text-gold"
-            : "text-ink dark:text-gray-200 hover:text-gold"
+            ? "text-gold-dark dark:text-gold"
+            : "text-ink dark:text-gray-200 hover:text-gold-dark dark:hover:text-gold"
         }`}
       >
         {item.label}
@@ -237,7 +237,7 @@ export default function Navbar({ namaSekolah, logoSekolah, pengaturan }: NavbarP
                     href={item.href}
                     onClick={() => setMobileOpen(false)}
                     className={`flex items-center gap-3 px-3 py-3 rounded-md font-semibold ${
-                      active ? "text-gold" : "text-ink dark:text-gray-200"
+                      active ? "text-gold-dark dark:text-gold" : "text-ink dark:text-gray-200"
                     }`}
                   >
                     {item.label}

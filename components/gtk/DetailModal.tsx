@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { ParsedGTKMember, Berkas } from './types';
 import { getColorMap, getBerkasIcon } from './constants';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
+import { useEscapeKey } from '@/hooks/useEscapeKey';
 
 interface DetailModalProps {
   selectedGtk: ParsedGTKMember | null;
@@ -20,6 +21,8 @@ export default function DetailModal({ selectedGtk, onClose }: DetailModalProps) 
 
   // Kunci scroll body saat modal terbuka
   useLockBodyScroll(!!selectedGtk);
+  // Tutup modal dengan Escape (aksesibilitas keyboard)
+  useEscapeKey(!!selectedGtk, onClose);
 
   if (!selectedGtk || !mounted) return null;
 

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { getWarna } from "@/lib/utils/warna";
 import type { FasilitasWithCount } from "@/lib/data/profil";
 import { useLockBodyScroll } from "@/hooks/useLockBodyScroll";
+import { useEscapeKey } from "@/hooks/useEscapeKey";
 
 interface FasilitasSectionProps {
   fasilitasList: FasilitasWithCount[];
@@ -26,6 +27,8 @@ export default function FasilitasSection({ fasilitasList }: FasilitasSectionProp
 
   // Kunci scroll body saat modal terbuka
   useLockBodyScroll(activeIndex !== null);
+  // Tutup modal dengan Escape (aksesibilitas keyboard)
+  useEscapeKey(activeIndex !== null, () => setActiveIndex(null));
 
   return (
     <section

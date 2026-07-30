@@ -47,6 +47,7 @@ export default function CekStatusForm() {
             minLength={16}
             inputMode="numeric"
             placeholder="Masukkan NIK (16 digit)"
+            aria-label="NIK (16 digit)"
             required
             className="w-full border rounded-lg p-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none"
           />
