@@ -8,14 +8,14 @@ const LAYANAN = [
     title: "PPDB Online",
     desc: "Pendaftaran siswa baru secara online.",
   },
-  {
-    href: "https://uptdsdntamansareh2-cat.fwh.is/",
-    icon: "fa-diagram-project",
-    color: "bg-emerald-600",
-    title: "Platform Terintegrasi",
-    desc: "Akses sistem CBT/ujian online dan Absensi siswa.",
-    external: true,
-  },
+ {
+  href: "https://absensiuptdsdndalpenang2.vercel.app/",
+  icon: "fa-qrcode",
+  color: "bg-emerald-600",
+  title: "Absensi SIS QR Code",
+  desc: "Sistem absensi digital siswa berbasis QR Code yang cepat dan akurat.",
+  external: true,
+},
   {
     href: "/kontak",
     icon: "fa-envelope-open-text",
